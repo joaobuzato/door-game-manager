@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Http from "../http/Http";
 import { Room } from "../types";
 
-export default function ListRoom() {
+export default function ListRoom(props: { changePage: Function }) {
   const [rooms, setRooms] = useState(Array<Room>);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function ListRoom() {
     Http.delete("/rooms", id)
       .then((response) => {
         if (response.status !== 200) return alert("Deu ruim");
-        return alert("Deu bom!");
+        return alert("Deu bom!"); //TODO adicionar um unshift
       })
       .catch(() => {
         alert("Deu Ruim ):");
@@ -27,9 +27,14 @@ export default function ListRoom() {
 
     console.log(event.currentTarget.value);
   };
+
+  const backHandler = () => {
+    props.changePage("main");
+  };
   return (
     <>
       <h2>Rooms List</h2>
+      <button onClick={backHandler}>Voltar ao início</button>
       <ul>
         {rooms.map((room) => {
           return (
