@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Http from "../http/Http";
-import { Room } from "../types";
+import Http from "../../http/Http";
+import { Room } from "../../types";
 
 export default function ListRoom(props: { changePage: Function }) {
   const [rooms, setRooms] = useState(Array<Room>);

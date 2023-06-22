@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import ListRoom from "./ListRoom";
-import MainPage from "./MainPage";
+import ListRoom from "./Room/ListRoom";
+import Home from "./Home";
 
-export default function Main(props: { name: string }) {
-  const [page, setPage] = useState("listRoom");
-  // const toggleButton = () => {
-  //   setPage((oldPage) => {
-  //     return oldPage === "listRoom" ? "" : "listRoom";
-  //   });
-  // };
-  const changePage = (page: string) => {
-    setPage(page);
+export default function Main(props: {
+  name: string;
+  setPage: Function;
+  page: string;
+}) {
+  const setPageHandler = (page: string) => {
+    props.setPage(page);
   };
   return (
     <main>
-      {page === "main" && <MainPage></MainPage>}
-      {page === "listRoom" && <ListRoom changePage={changePage}></ListRoom>}
+      {props.page === "main" && <Home></Home>}
+      {props.page === "listRoom" && (
+        <ListRoom changePage={setPageHandler}></ListRoom>
+      )}
     </main>
   );
 }
