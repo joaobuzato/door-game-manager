@@ -1,0 +1,26 @@
+.aside {
+  width: 20vw;
+  height: 87vh;
+  background-color: #E7E9EB;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.aside button {
+    all:unset;
+    background-color: #E7E9EB;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    height:40px;
+
+}
+.aside button:hover {
+    filter: brightness(85%)
+}
+
+.selected {
+    background: #04AA6D !important;
+}

@@ -13,7 +13,7 @@ function App() {
   return (
     <div className={styles.app_container}>
       <Header />
-      <Menu setPage={changePage} />
+      <Menu page={page} setPage={changePage} />
       <Main name="Lista de Quartos" setPage={changePage} page={page} />
     </div>
   );
