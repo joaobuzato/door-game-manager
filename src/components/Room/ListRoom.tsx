@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Http from "../../http/Http";
 import { Room } from "../../types";
 
-export default function ListRoom(props: { changePage: Function }) {
+export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
 
   useEffect(() => {
@@ -27,14 +27,9 @@ export default function ListRoom(props: { changePage: Function }) {
 
     console.log(event.currentTarget.value);
   };
-
-  const backHandler = () => {
-    props.changePage("main");
-  };
   return (
     <>
       <h2>Rooms List</h2>
-      <button onClick={backHandler}>Voltar ao início</button>
       <ul>
         {rooms.map((room) => {
           return (

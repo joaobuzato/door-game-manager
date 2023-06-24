@@ -1,0 +1,13 @@
+.button {
+    all:unset;
+    background-color: #E7E9EB;
+    height: 30px;
+    padding:10px;
+    border-radius: 5px;
+    border: 1px solid black; 
+}
+
+.button:hover {
+    filter: brightness(90%);
+    cursor:pointer;
+}
