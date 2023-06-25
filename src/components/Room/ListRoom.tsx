@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Http from "../../http/Http";
 import { Room } from "../../types";
+import RoomForm from "./RoomForm";
+import Button from "../UI/Button";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
+  const [form, setForm] = useState(<></>);
 
   useEffect(() => {
     Http.get<Room>("/rooms", {}).then((responseRooms) => {
@@ -12,7 +15,8 @@ export default function ListRoom() {
   }, []);
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.value);
+    const room_id = Number(event.currentTarget.value);
+    setForm(<RoomForm room_id={room_id}></RoomForm>);
   };
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
@@ -29,18 +33,19 @@ export default function ListRoom() {
   };
   return (
     <>
+      {form}
       <h2>Rooms List</h2>
       <ul>
         {rooms.map((room) => {
           return (
             <li key={room.id}>
               {room.title}
-              <button value={room.id} onClick={editHandler}>
+              <Button value={room.id} onClick={editHandler}>
                 edit
-              </button>
-              <button value={room.id} onClick={deleteHandler}>
+              </Button>
+              <Button value={room.id} onClick={deleteHandler}>
                 delete
-              </button>
+              </Button>
             </li>
           );
         })}

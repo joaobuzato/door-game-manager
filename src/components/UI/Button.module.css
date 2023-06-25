@@ -1,10 +1,12 @@
 .button {
     all:unset;
-    background-color: #E7E9EB;
+    
     height: 30px;
-    padding:10px;
+    padding: 10px;
     border-radius: 5px;
-    border: 1px solid black; 
+    -webkit-box-shadow: 12px 14px 10px -6px rgba(0,0,0,0.51);
+    -moz-box-shadow: 12px 14px 10px -6px rgba(0,0,0,0.51);
+    box-shadow: 12px 14px 10px -6px rgba(0,0,0,0.51);
 }
 
 .button:hover {

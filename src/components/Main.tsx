@@ -15,7 +15,7 @@ export default function Main(props: {
   return (
     <main className={styles.main}>
       <Button value="main" onClick={setPageHandler}>
-        Voltar ao início
+        {"< Voltar ao início"}
       </Button>
       {props.page === "main" && <Home></Home>}
       {props.page === "listRoom" && <ListRoom></ListRoom>}
