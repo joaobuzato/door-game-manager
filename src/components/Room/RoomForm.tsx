@@ -1,7 +1,14 @@
 import styles from "./RoomForm.module.css";
 import { Formik } from "formik";
 
-export default function RoomForm(props: { room_id?: number }) {
+export default function RoomForm(props: {
+  room_id?: number;
+  closeForm: Function;
+}) {
+  const cancelHandler = () => {
+    props.closeForm();
+  };
+
   return (
     <Formik
       initialValues={{ id: 0, title: "", text: "", path: "" }}
@@ -73,6 +80,7 @@ export default function RoomForm(props: { room_id?: number }) {
             {errors.path && touched.path && errors.path}
           </label>
 
+          <button onClick={cancelHandler}>Cancel</button>
           <button type="submit" disabled={isSubmitting}>
             Salvar
           </button>

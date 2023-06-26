@@ -16,8 +16,13 @@ export default function ListRoom() {
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const room_id = Number(event.currentTarget.value);
-    setForm(<RoomForm room_id={room_id}></RoomForm>);
+    setForm(<RoomForm closeForm={closeForm} room_id={room_id}></RoomForm>);
   };
+
+  const closeForm = () => {
+    setForm(<></>);
+  };
+
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
     Http.delete("/rooms", id)
@@ -31,10 +36,16 @@ export default function ListRoom() {
 
     console.log(event.currentTarget.value);
   };
+
   return (
     <>
       {form}
       <h2>Rooms List</h2>
+      <button
+        onClick={() => setForm(<RoomForm closeForm={closeForm}></RoomForm>)}
+      >
+        Add New Room
+      </button>
       <ul>
         {rooms.map((room) => {
           return (
