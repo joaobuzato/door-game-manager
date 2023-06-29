@@ -1,11 +1,10 @@
 .main {
-    width: 80vw;
-    height: 83vh;
     background-color: #C9EDDC;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    grid-area: 2 / 2 / 6 / 6;
     
     
 }

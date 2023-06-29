@@ -5,8 +5,8 @@ export default function Header() {
     <>
       <header className={styles.header}>
         <h1>Door Game Manager</h1>
+        <nav></nav>
       </header>
-      <nav></nav>
     </>
   );
 }

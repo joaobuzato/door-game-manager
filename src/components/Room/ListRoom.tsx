@@ -3,6 +3,7 @@ import Http from "../../http/Http";
 import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import Button from "../UI/Button";
+import styles from "./ListRoom.module.css";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -46,17 +47,17 @@ export default function ListRoom() {
       >
         Add New Room
       </button>
-      <ul>
+      <ul className={styles.ul}>
         {rooms.map((room) => {
           return (
             <li key={room.id}>
               {room.title}
-              <Button value={room.id} onClick={editHandler}>
+              <button value={room.id} onClick={editHandler}>
                 edit
-              </Button>
-              <Button value={room.id} onClick={deleteHandler}>
+              </button>
+              <button value={room.id} onClick={deleteHandler}>
                 delete
-              </Button>
+              </button>
             </li>
           );
         })}

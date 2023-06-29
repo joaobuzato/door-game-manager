@@ -1,7 +1,5 @@
 .header {
-  width: 100vw;
-  height: 13vh;
-  min-height: 80px;
+  grid-area: 1 / 1 / 2 / 6;
   background-color: #fff;
   display:flex;
   flex-wrap: wrap;

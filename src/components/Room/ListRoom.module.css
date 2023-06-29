@@ -1,0 +1,19 @@
+.ul {
+    max-height: 400px;
+    overflow: overlay;
+    display:flex;
+    flex-direction: column;
+    border: 1px black solid;
+    margin: 30px;
+    padding:30px;
+    width: 60%;
+}
+
+.ul li {
+    display: flex;
+    width: 90%;
+    justify-content: flex-end;
+    border: 1px solid black;
+    padding:10px;
+    margin-bottom: 10px;
+}

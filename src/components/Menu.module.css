@@ -1,11 +1,10 @@
 .aside {
-  width: 20vw;
-  height: 83vh;
+ 
   background-color: #E7E9EB;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-end;
+  grid-area: 2 / 1 / 6 / 2;
 }
 
 .aside button {
