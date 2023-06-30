@@ -1,17 +1,20 @@
 import styles from "./RoomForm.module.css";
 import { Formik } from "formik";
+import { Room } from "../../types";
 
-export default function RoomForm(props: {
-  room_id?: number;
-  closeForm: Function;
-}) {
+export default function RoomForm(props: { room?: Room; closeForm: Function }) {
   const cancelHandler = () => {
     props.closeForm();
   };
 
   return (
     <Formik
-      initialValues={{ id: 0, title: "", text: "", path: "" }}
+      initialValues={{
+        id: props.room?.id ?? 0,
+        title: props.room?.title ?? "",
+        text: props.room?.text ?? "",
+        path: props.room?.path ?? "",
+      }}
       validate={(values) => {
         const errors = { title: "" };
         if (!values.title) {
@@ -36,12 +39,12 @@ export default function RoomForm(props: {
         isSubmitting,
       }) => (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>{props.room_id ? "Update Room" : "Insert a Room"}</h2>
+          <h2>{props.room ? "Update Room" : "Insert a Room"}</h2>
           <input
             className={styles.id}
             type="number"
             name="id"
-            defaultValue={props.room_id ?? 0}
+            defaultValue={props.room?.id ?? 0}
           />
           <label htmlFor="title">
             Title

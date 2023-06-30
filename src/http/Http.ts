@@ -1,4 +1,9 @@
-const BASE_URL = "http://localhost:8080";
+// import dotenv from "dotenv";
+
+// dotenv.config();
+
+const BASE_URL = "http://44.201.179.67:8080";
+
 export default class Http {
   static async get<T>(url: string, options: {}): Promise<Array<T>> {
     const response = await fetch(BASE_URL + url);

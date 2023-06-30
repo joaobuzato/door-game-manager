@@ -6,20 +6,20 @@ import Button from "./UI/Button";
 
 export default function Main(props: {
   name: string;
-  setPage: Function;
-  page: string;
+  setActivePage: Function;
+  activePage: string;
 }) {
   const setPageHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    props.setPage(event.currentTarget.value);
+    props.setActivePage(event.currentTarget.value);
   };
   return (
     <main className={styles.main}>
       <Button value="main" onClick={setPageHandler}>
         {"< Voltar ao início"}
       </Button>
-      {props.page === "main" && <Home></Home>}
-      {props.page === "listRoom" && <ListRoom></ListRoom>}
-      {props.page === "listDoor" && <ListDoor></ListDoor>}
+      {props.activePage === "main" && <Home></Home>}
+      {props.activePage === "listRoom" && <ListRoom></ListRoom>}
+      {props.activePage === "listDoor" && <ListDoor></ListDoor>}
     </main>
   );
 }

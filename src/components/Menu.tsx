@@ -1,26 +1,29 @@
 import { MouseEvent } from "react";
 import styles from "./Menu.module.css";
 
-export default function Menu(props: { setPage: Function; page: string }) {
-  const setPageHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    props.setPage(e.currentTarget.value);
+export default function Menu(props: {
+  setActivePage: Function;
+  activePage: string;
+}) {
+  const setActivePageHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    props.setActivePage(e.currentTarget.value);
   };
   return (
     <>
       <aside className={styles.aside}>
         <button
-          className={props.page === "listRoom" ? styles.selected : ""}
+          className={props.activePage === "listRoom" ? styles.selected : ""}
           key="listRoom"
           value="listRoom"
-          onClick={setPageHandler}
+          onClick={setActivePageHandler}
         >
           Rooms
         </button>
         <button
-          className={props.page === "listDoor" ? styles.selected : ""}
+          className={props.activePage === "listDoor" ? styles.selected : ""}
           key="listDoor"
           value="listDoor"
-          onClick={setPageHandler}
+          onClick={setActivePageHandler}
         >
           Doors
         </button>

@@ -17,7 +17,14 @@ export default function ListRoom() {
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const room_id = Number(event.currentTarget.value);
-    setForm(<RoomForm closeForm={closeForm} room_id={room_id}></RoomForm>);
+    openForm(room_id);
+  };
+
+  const openForm = (room_id?: number) => {
+    const room = rooms.find((room) => Number(room.id) === room_id) || undefined;
+    setForm(
+      <RoomForm closeForm={closeForm} room={room ?? undefined}></RoomForm>
+    );
   };
 
   const closeForm = () => {
@@ -42,11 +49,7 @@ export default function ListRoom() {
     <>
       {form}
       <h2>Rooms List</h2>
-      <button
-        onClick={() => setForm(<RoomForm closeForm={closeForm}></RoomForm>)}
-      >
-        Add New Room
-      </button>
+      <button onClick={() => openForm()}>Add New Room</button>
       <ul className={styles.ul}>
         {rooms.map((room) => {
           return (

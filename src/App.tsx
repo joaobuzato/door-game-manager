@@ -6,15 +6,19 @@ import { useState } from "react";
 import styles from "./App.module.css";
 
 function App() {
-  const [page, setPage] = useState("main");
+  const [activePage, setActivePage] = useState("main");
   function changePage(page: string) {
-    setPage(page);
+    setActivePage(page);
   }
   return (
     <div className={styles.app_container}>
       <Header />
-      <Menu page={page} setPage={changePage} />
-      <Main name="Lista de Quartos" setPage={changePage} page={page} />
+      <Menu activePage={activePage} setActivePage={changePage} />
+      <Main
+        name="Lista de Quartos"
+        setActivePage={changePage}
+        activePage={activePage}
+      />
     </div>
   );
 }
