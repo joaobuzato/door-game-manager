@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Http from "../../http/Http";
 import { Room } from "../../types";
 import RoomForm from "./RoomForm";
-import Button from "../UI/Button";
 import styles from "./ListRoom.module.css";
 
 export default function ListRoom() {
@@ -11,9 +10,10 @@ export default function ListRoom() {
 
   useEffect(() => {
     Http.get<Room>("/rooms", {}).then((responseRooms) => {
+      console.log("fazendo o get", responseRooms);
       setRooms(responseRooms);
     });
-  }, []);
+  }, [form]);
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const room_id = Number(event.currentTarget.value);
