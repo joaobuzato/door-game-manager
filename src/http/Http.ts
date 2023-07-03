@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:8080";
-//const BASE_URL = "http://44.201.179.67:8080";
+//const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://44.201.179.67:8080";
 
 export default class Http {
   static async get<T>(endpoint: string, options: {}): Promise<Array<T>> {

@@ -20,10 +20,21 @@ export default function ListRoom() {
     openForm(room_id);
   };
 
+  const validate = (room: Room) => {
+    const samePathRoom = rooms.find((r) => r.path === room.path);
+    if (samePathRoom && samePathRoom.id !== room.id) {
+      return { isValid: false, message: "não pode ter paths iguais po" };
+    }
+    return { isValid: true, message: "" };
+  };
   const openForm = (room_id?: number) => {
     const room = rooms.find((room) => Number(room.id) === room_id) || undefined;
     setForm(
-      <RoomForm closeForm={closeForm} room={room ?? undefined}></RoomForm>
+      <RoomForm
+        validate={validate}
+        closeForm={closeForm}
+        room={room ?? undefined}
+      ></RoomForm>
     );
   };
 
