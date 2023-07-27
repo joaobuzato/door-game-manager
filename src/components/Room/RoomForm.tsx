@@ -3,7 +3,6 @@ import { Room } from "../../types";
 import { useState } from "react";
 import Http from "../../http/Http";
 import Input from "../UI/Input";
-import { FormProvider, useForm } from "react-hook-form";
 
 export default function RoomForm(props: {
   room?: Room;
@@ -18,11 +17,11 @@ export default function RoomForm(props: {
   const [text, setText] = useState(props.room?.text ?? "");
   const [path, setPath] = useState(props.room?.path ?? "");
 
-  const methods = useForm();
-
   const validate = (room: Room) => {
     return props.validate(room);
   };
+
+  console.log(props.room);
 
   const handleEdit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,32 +60,27 @@ export default function RoomForm(props: {
       });
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
-  });
+  const onSubmit = {};
 
   return (
-    <FormProvider {...methods}>
-      <form
-        className={styles.form}
-        noValidate
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <h2>{props.room ? "Update Room" : "Insert a Room"}</h2>
-        <input
-          className={styles.id}
-          type="number"
-          name="id"
-          defaultValue={id}
-        />
-        <Input
-          type="text"
-          placeholder="Insert title"
-          id="title"
-          label="Title"
-        />
-
-        {/* <label htmlFor="title">
+    <form
+      className={styles.form}
+      noValidate
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <h2>{props.room ? "Update Room" : "Insert a Room"}</h2>
+      <input className={styles.id} type="number" name="id" defaultValue={id} />
+      <Input
+        type="text"
+        placeholder="Insert title"
+        id="title"
+        label="Title"
+        value={title}
+        handleChange={() => {
+          setTitle(title);
+        }}
+      />
+      {/* <label htmlFor="title">
         Title
         <input
           type="text"
@@ -99,7 +93,7 @@ export default function RoomForm(props: {
           value={title}
         />
       </label> */}
-        {/* <label htmlFor="text">
+      {/* <label htmlFor="text">
           Text
           <input
             type="textarea"
@@ -112,7 +106,7 @@ export default function RoomForm(props: {
             value={text}
           />
         </label> */}
-        {/* <label htmlFor="path">
+      {/* <label htmlFor="path">
           Path
           <input
             type="text"
@@ -125,10 +119,8 @@ export default function RoomForm(props: {
             value={path}
           />
         </label> */}
-
-        <button onClick={cancelHandler}>Cancel</button>
-        <button onClick={onSubmit}>Salvar</button>
-      </form>
-    </FormProvider>
+      <button onClick={cancelHandler}>Cancel</button>
+      {/* <button onClick={onSubmit}>Salvar</button> */}
+    </form>
   );
 }

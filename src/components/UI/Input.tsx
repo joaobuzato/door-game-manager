@@ -1,41 +1,20 @@
-import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
+import { useState } from "react";
 
 export default function Input(props: {
   label: string;
   type: string;
   placeholder: string;
   id: string;
-  validation?: { required: boolean };
+  value: string | number;
+  defaultValue?: string | number;
+  handleChange: Function;
 }) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+  const [value, setValue] = useState(props.value ?? "");
 
-  //   function findInputError(errors: FieldErrors<FieldValues>, label: string) {
-  //     const filtered = Object.keys(errors)
-  //       .filter((key) => key.includes(label))
-  //       .map((key) => {
-  //         return {
-  //           error: errors[key],
-  //         };
-  //       });
-
-  //     //   .reduce((cur, key) => {
-  //     //     return Object.assign(cur, { error: errors[key] }, {});
-  //     //   });
-
-  //     return filtered;
-  //   }
-
-  //   function isFormInvalid(err) {
-  //     if (Object.keys(err).length > 0) return true;
-  //     return false;
-  //   }
-
-  //   const inputError = findInputError(errors, props.label);
-  //   const isInvalid = isFormInvalid(inputError);
-
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+    props.handleChange(value);
+  };
   return (
     <>
       <label htmlFor={props.id}>
@@ -44,17 +23,9 @@ export default function Input(props: {
           id={props.id}
           type={props.type}
           placeholder={props.placeholder}
-          {...register(props.label, {
-            required: {
-              value: true,
-              message: "required",
-            },
-          })}
+          value={value}
+          onChange={changeHandler}
         ></input>
-        {/* <InputError
-          message={inputError.error.message}
-          key={inputError.error.message}
-        /> */}
       </label>
     </>
   );
