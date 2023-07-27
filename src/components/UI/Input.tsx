@@ -1,4 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import InvalidInput from "./InvalidInput";
+
+type ValidationOpts = {
+  required: boolean;
+  maxLength: number;
+  minLength: number;
+};
 
 export default function Input(props: {
   label: string;
@@ -6,15 +13,27 @@ export default function Input(props: {
   placeholder: string;
   id: string;
   value: string | number;
-  defaultValue?: string | number;
+  validation?: ValidationOpts;
   handleChange: Function;
 }) {
   const [value, setValue] = useState(props.value ?? "");
+  const [isValid, setIsValid] = useState(false);
+  const errorsMessages = ["errou", "faiô"];
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
     props.handleChange(value);
+    validate();
   };
+
+  const validate = () => {
+    props.validation?.required && !value ? setIsValid(false) : setIsValid(true);
+  };
+
+  useEffect(() => {
+    validate();
+  });
+
   return (
     <>
       <label htmlFor={props.id}>
@@ -27,6 +46,7 @@ export default function Input(props: {
           onChange={changeHandler}
         ></input>
       </label>
+      {!isValid && <InvalidInput messages={errorsMessages}></InvalidInput>}
     </>
   );
 }

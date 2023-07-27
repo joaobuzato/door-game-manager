@@ -76,6 +76,7 @@ export default function RoomForm(props: {
         id="title"
         label="Title"
         value={title}
+        validation={{ required: true, maxLength: 200, minLength: 1 }}
         handleChange={() => {
           setTitle(title);
         }}
