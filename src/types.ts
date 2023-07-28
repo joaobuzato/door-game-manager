@@ -5,10 +5,10 @@ export type Room = {
   path: string;
   doors?: Door[];
   actions?: Action[];
-  expandedTexts?: ExpandedText[];
+  expandedTexts?: ExtendedText[];
 };
 
-export type ExpandedText = {
+export type ExtendedText = {
   id: number;
   sentence: string;
   text: string;

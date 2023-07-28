@@ -7,6 +7,7 @@ export default function ListDoor() {
 
   useEffect(() => {
     Http.get<Door>("/doors", {}).then((responseDoors) => {
+      console.log(responseDoors);
       setDoors(responseDoors);
     });
   }, []);
