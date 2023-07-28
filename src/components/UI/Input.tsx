@@ -12,7 +12,7 @@ export default function Input(props: {
   type: string;
   placeholder: string;
   id: string;
-  value: string | number;
+  value: string;
   validation?: ValidationOpts;
   handleChange: Function;
 }) {
@@ -28,6 +28,12 @@ export default function Input(props: {
 
   const validate = () => {
     props.validation?.required && !value ? setIsValid(false) : setIsValid(true);
+    props.validation?.maxLength && !(value.length > props.validation.maxLength)
+      ? setIsValid(false)
+      : setIsValid(true);
+    props.validation?.minLength && !(value.length < props.validation.minLength)
+      ? setIsValid(false)
+      : setIsValid(true);
   };
 
   useEffect(() => {
@@ -49,8 +55,4 @@ export default function Input(props: {
       {!isValid && <InvalidInput messages={errorsMessages}></InvalidInput>}
     </>
   );
-}
-
-export function InputError({ message }: { message: string }) {
-  return <p>{message}</p>;
 }

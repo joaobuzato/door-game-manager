@@ -3,6 +3,8 @@ import Http from "../../http/Http";
 import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -65,13 +67,16 @@ export default function ListRoom() {
         {rooms.map((room) => {
           return (
             <li key={room.id}>
-              {room.title}
-              <button value={room.id} onClick={editHandler}>
-                edit
-              </button>
-              <button value={room.id} onClick={deleteHandler}>
-                delete
-              </button>
+              <p>{room.title}</p>
+              <p>{room.path}</p>
+              <div className={styles.actions}>
+                <button value={room.id} onClick={editHandler}>
+                  <FontAwesomeIcon icon={faPen} />
+                </button>
+                <button value={room.id} onClick={deleteHandler}>
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </button>
+              </div>
             </li>
           );
         })}

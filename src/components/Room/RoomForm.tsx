@@ -14,6 +14,7 @@ export default function RoomForm(props: {
   };
   const id = Number(props.room?.id ?? 0);
   const [title, setTitle] = useState(props.room?.title ?? "");
+  const [isTitleValid, setIsTitleValid] = useState(false);
   const [text, setText] = useState(props.room?.text ?? "");
   const [path, setPath] = useState(props.room?.path ?? "");
 
@@ -23,9 +24,7 @@ export default function RoomForm(props: {
 
   console.log(props.room);
 
-  const handleEdit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const room = { id, title, text, path };
+  const handleEdit = (room: Room) => {
     const validateRoom = validate(room);
     if (!validateRoom.isValid) {
       alert(validateRoom.message);
@@ -41,9 +40,7 @@ export default function RoomForm(props: {
         cancelHandler();
       });
   };
-  const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const room = { id: 0, title, text, path };
+  const handleSave = (room: Room) => {
     const validateRoom = validate(room);
     if (!validateRoom.isValid) {
       alert(validateRoom.message);
@@ -60,68 +57,58 @@ export default function RoomForm(props: {
       });
   };
 
-  const onSubmit = {};
+  const onSubmit = () => {
+    if (id !== 0) {
+      handleEdit({ id, title, text, path });
+    } else {
+      handleSave({ id, title, text, path });
+    }
+  };
 
   return (
-    <form
-      className={styles.form}
-      noValidate
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
       <h2>{props.room ? "Update Room" : "Insert a Room"}</h2>
       <input className={styles.id} type="number" name="id" defaultValue={id} />
-      <Input
-        type="text"
-        placeholder="Insert title"
-        id="title"
-        label="Title"
-        value={title}
-        validation={{ required: true, maxLength: 200, minLength: 1 }}
-        handleChange={() => {
-          setTitle(title);
-        }}
-      />
-      {/* <label htmlFor="title">
+      <label htmlFor="title">
         Title
         <input
           type="text"
           placeholder="Insert title"
-          name="title"
           id="title"
-          onChange={(event) => {
-            setTitle(event.currentTarget.value);
-          }}
           value={title}
+          onChange={(e) => {
+            setTitle(e.currentTarget.value);
+          }}
         />
-      </label> */}
-      {/* <label htmlFor="text">
-          Text
-          <input
-            type="textarea"
-            name="text"
-            placeholder="text"
-            id="text"
-            onChange={(event) => {
-              setText(event.currentTarget.value);
-            }}
-            value={text}
-          />
-        </label> */}
-      {/* <label htmlFor="path">
-          Path
-          <input
-            type="text"
-            name="path"
-            id="path"
-            placeholder="Insert path"
-            onChange={(event) => {
-              setPath(event.currentTarget.value);
-            }}
-            value={path}
-          />
-        </label> */}
+      </label>
+      <label htmlFor="text">
+        Text
+        <input
+          type="textarea"
+          name="text"
+          placeholder="text"
+          id="text"
+          onChange={(event) => {
+            setText(event.currentTarget.value);
+          }}
+          value={text}
+        />
+      </label>
+      <label htmlFor="path">
+        Path
+        <input
+          type="text"
+          name="path"
+          id="path"
+          placeholder="Insert path"
+          onChange={(event) => {
+            setPath(event.currentTarget.value);
+          }}
+          value={path}
+        />
+      </label>
       <button onClick={cancelHandler}>Cancel</button>
-      {/* <button onClick={onSubmit}>Salvar</button> */}
+      <button onClick={onSubmit}>Salvar</button>
     </form>
   );
 }
