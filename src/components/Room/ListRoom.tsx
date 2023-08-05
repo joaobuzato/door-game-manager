@@ -12,7 +12,6 @@ export default function ListRoom() {
 
   useEffect(() => {
     Http.get<Room>("/rooms", {}).then((responseRooms) => {
-      console.log("fazendo o get", responseRooms);
       setRooms(responseRooms);
     });
   }, [form]);
@@ -54,8 +53,6 @@ export default function ListRoom() {
       .catch(() => {
         alert("Deu Ruim ):");
       });
-
-    console.log(event.currentTarget.value);
   };
 
   return (

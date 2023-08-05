@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import InvalidInput from "./InvalidInput";
+import styles from "./Input.module.css";
 
-type ValidationOpts = {
-  required: boolean;
-  maxLength: number;
-  minLength: number;
+export type ValidationOpts = {
+  required?: boolean;
+  maxLength?: number;
+  minLength?: number;
 };
 
 export default function Input(props: {
@@ -14,37 +15,66 @@ export default function Input(props: {
   id: string;
   value: string;
   validation?: ValidationOpts;
-  handleChange: Function;
+  onChange: Function;
 }) {
   const [value, setValue] = useState(props.value ?? "");
   const [isValid, setIsValid] = useState(false);
-  const errorsMessages = ["errou", "faiô"];
+  const [errorMessage, setErrorMessage] = useState("");
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    validate(event.currentTarget.value);
     setValue(event.currentTarget.value);
-    props.handleChange(value);
-    validate();
   };
 
-  const validate = () => {
-    props.validation?.required && !value ? setIsValid(false) : setIsValid(true);
-    props.validation?.maxLength && !(value.length > props.validation.maxLength)
-      ? setIsValid(false)
-      : setIsValid(true);
-    props.validation?.minLength && !(value.length < props.validation.minLength)
-      ? setIsValid(false)
-      : setIsValid(true);
+  const validate = (value: string) => {
+    if (props.validation?.required && !value) {
+      setIsValid(false);
+      setErrorMessage("Campo Obrigatório");
+      props.onChange(props.id, value, false);
+      return;
+    } else {
+      setIsValid(true);
+      setErrorMessage("");
+    }
+
+    if (
+      props.validation?.maxLength &&
+      value.length > props.validation.maxLength
+    ) {
+      setIsValid(false);
+      setErrorMessage(`Máximo de ${props.validation.maxLength} caracteres`);
+      props.onChange(props.id, value, false);
+      return;
+    } else {
+      setIsValid(true);
+      setErrorMessage("");
+    }
+
+    if (
+      props.validation?.minLength &&
+      value.length < props.validation.minLength
+    ) {
+      setIsValid(false);
+      setErrorMessage(`Mínimo de ${props.validation.minLength} caracteres`);
+      props.onChange(props.id, value, false);
+      return;
+    } else {
+      setIsValid(true);
+      setErrorMessage("");
+    }
+    props.onChange(props.id, value, true);
   };
 
   useEffect(() => {
-    validate();
+    validate(value);
   });
 
   return (
-    <>
-      <label htmlFor={props.id}>
+    <div className={styles.inputContainer}>
+      <label htmlFor={props.id} className={styles.label}>
         {props.label}
         <input
+          className={styles.input}
           id={props.id}
           type={props.type}
           placeholder={props.placeholder}
@@ -52,7 +82,7 @@ export default function Input(props: {
           onChange={changeHandler}
         ></input>
       </label>
-      {!isValid && <InvalidInput messages={errorsMessages}></InvalidInput>}
-    </>
+      {!isValid && <InvalidInput message={errorMessage}></InvalidInput>}
+    </div>
   );
 }

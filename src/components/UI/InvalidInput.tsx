@@ -1,13 +1,11 @@
 import styles from "./InvalidInput.module.css";
 
-export default function InvalidInput(props: { messages: string[] }) {
+export default function InvalidInput(props: { message: string }) {
   return (
     <div className={styles.tooltip}>
       !
       <div className={styles.tooltiptext}>
-        {props.messages.map((message) => {
-          return <p key={message}>{message}</p>;
-        })}
+        <p key={props.message}>{props.message}</p>
       </div>
     </div>
   );

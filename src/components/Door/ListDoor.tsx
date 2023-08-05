@@ -7,14 +7,11 @@ export default function ListDoor() {
 
   useEffect(() => {
     Http.get<Door>("/doors", {}).then((responseDoors) => {
-      console.log(responseDoors);
       setDoors(responseDoors);
     });
   }, []);
 
-  const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.value);
-  };
+  const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {};
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
     Http.delete("/doors", id)
@@ -25,8 +22,6 @@ export default function ListDoor() {
       .catch(() => {
         alert("Deu Ruim ):");
       });
-
-    console.log(event.currentTarget.value);
   };
 
   return (
