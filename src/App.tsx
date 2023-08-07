@@ -22,14 +22,14 @@ function App() {
       <Header />
 
       {context.isLoggedIn ? (
-        <>
+        <section className={styles.container}>
           <Menu activePage={activePage} setActivePage={changePage} />
           <Main
             name="Lista de Quartos"
             setActivePage={changePage}
             activePage={activePage}
           />
-        </>
+        </section>
       ) : (
         <Login />
       )}

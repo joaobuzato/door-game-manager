@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import AuthContext from "../../store/AuthContext";
+import styles from "./Navigation.module.css";
 
 const Navigation = () => {
   const context = useContext(AuthContext);
   return (
-    <nav>
+    <nav className={styles.nav}>
       <ul>
         {context.isLoggedIn && (
           <li>

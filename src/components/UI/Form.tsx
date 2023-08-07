@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
 import Http from "../../http/Http";
 
 type FormProps = {
+  saveButtonText?: string;
+  cancelButtonText?: string;
   onCancelCallback: Function;
   onSuccessCallback: Function;
   endpoint: string;
@@ -21,6 +23,8 @@ type FormProps = {
 type InputValidity = { id: string; isValid: boolean; value: string }[];
 
 export default function Form({
+  saveButtonText,
+  cancelButtonText,
   onCancelCallback,
   onSuccessCallback,
   endpoint,
@@ -54,21 +58,27 @@ export default function Form({
     const body = format(formState);
     if (entityId > 0) {
       Http.put(endpoint, entityId, body)
-        .then(() => {
+        .then((response) => {
+          if (response.status > 300) {
+            alert("Alguma coisa deu errada ao salvar.");
+            return;
+          }
           onSuccessCallback();
-          alert("Deu bom o PUT");
         })
         .catch((error) => {
-          alert("Deu ruim o PUT" + error);
+          alert("Alguma coisa deu errado.");
         });
     } else {
       Http.post(endpoint, body)
-        .then(() => {
+        .then((response) => {
+          if (response.status > 300) {
+            alert("Alguma coisa deu errada ao salvar.");
+            return;
+          }
           onSuccessCallback();
-          alert("Deu bom o POST");
         })
         .catch((error) => {
-          alert("Deu ruim o POST" + error);
+          alert("Alguma coisa deu errado.");
         });
     }
   };
@@ -103,10 +113,10 @@ export default function Form({
       })}
 
       <button type="submit" disabled={!isFormValid}>
-        Salvar
+        {saveButtonText ?? "Salvar"}
       </button>
       <button type="button" onClick={handleCancel}>
-        Cancelar
+        {cancelButtonText ?? "Cancelar"}
       </button>
     </form>
   );

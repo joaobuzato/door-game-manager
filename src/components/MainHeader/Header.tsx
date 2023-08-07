@@ -7,8 +7,8 @@ export default function Header() {
     <>
       <header className={styles.header}>
         <h1>Door Game Manager</h1>
-        <Navigation></Navigation>
       </header>
+      <Navigation></Navigation>
     </>
   );
 }

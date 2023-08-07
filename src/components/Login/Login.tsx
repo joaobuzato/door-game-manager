@@ -43,6 +43,7 @@ const Login = () => {
         endpoint="/auth"
         inputs={formInputs}
         entityId={0}
+        saveButtonText="Login"
       />
     </div>
   );

@@ -1,25 +1,9 @@
-.app_container {
-
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-
+.container {
+    display: flex;
+    flex-direction: row;
+    overflow: visible;
 }
 
-
-
-.parent {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  }
-  
-  .div1 { grid-area: 1 / 1 / 2 / 6; }
-  .div2 { grid-area: 2 / 1 / 6 / 2; }
-  .div3 { grid-area: 2 / 2 / 6 / 6; }
+.app_container{ 
+    overflow: visible;
+}

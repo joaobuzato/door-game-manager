@@ -60,24 +60,37 @@ export default function ListRoom() {
       {form}
       <h2>Rooms List</h2>
       <button onClick={() => openForm()}>Add New Room</button>
-      <ul className={styles.ul}>
+      <table className={styles.table}>
+        <tr>
+          <th>Title</th>
+          <th>Path</th>
+          <th>Actions</th>
+        </tr>
         {rooms.map((room) => {
           return (
-            <li key={room.id}>
-              <p>{room.title}</p>
-              <p>{room.path}</p>
-              <div className={styles.actions}>
-                <button value={room.id} onClick={editHandler}>
+            <tr key={room.id}>
+              <td>{room.title}</td>
+              <td>{room.path}</td>
+              <td className={styles.actions}>
+                <button
+                  className={styles.button}
+                  value={room.id}
+                  onClick={editHandler}
+                >
                   <FontAwesomeIcon icon={faPen} />
                 </button>
-                <button value={room.id} onClick={deleteHandler}>
+                <button
+                  className={styles.button}
+                  value={room.id}
+                  onClick={deleteHandler}
+                >
                   <FontAwesomeIcon icon={faTrashCan} />
                 </button>
-              </div>
-            </li>
+              </td>
+            </tr>
           );
         })}
-      </ul>
+      </table>
     </>
   );
 }

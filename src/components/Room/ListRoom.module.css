@@ -1,30 +1,26 @@
-.ul {
-    max-height: 400px;
-    overflow: overlay;
-    display:flex;
-    flex-direction: column;
+.table {
     border: 1px black solid;
-    margin: 30px;
-    padding:30px;
-    width: 60%;
+    padding: 10px;
+    border-radius: 3px;
 }
 
-.ul li {
-    display: flex;
-    width: 90%;
-    justify-content:space-between;
-    border: 1px solid black;
-    padding:10px;
-    margin-bottom: 10px;
+.table tr {
+    border-radius: 10px solid black;
 }
 
 .actions {
+    width: 120px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.actions button {
+.button {
+   
+    margin-left: 10px;
+    background-color: #04AA6D;
     width: 44px;
     height: 44px;
-    font-size: x-large;
+    font-size: x-small;
 }
