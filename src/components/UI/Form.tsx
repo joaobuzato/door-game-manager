@@ -3,7 +3,8 @@ import Input, { ValidationOpts } from "./Input";
 import Http from "../../http/Http";
 
 type FormProps = {
-  closeForm: Function;
+  onCancelCallback: Function;
+  onSuccessCallback: Function;
   endpoint: string;
   formId: string;
   entityId: number;
@@ -20,7 +21,8 @@ type FormProps = {
 type InputValidity = { id: string; isValid: boolean; value: string }[];
 
 export default function Form({
-  closeForm,
+  onCancelCallback,
+  onSuccessCallback,
   endpoint,
   entityId,
   formId,
@@ -40,8 +42,6 @@ export default function Form({
 
   const verifyFormValid = (formState: InputValidity) => {
     for (const input of formState) {
-      console.log(input.isValid);
-
       if (!input.isValid) {
         setIsFormValid(false);
         return;
@@ -55,7 +55,7 @@ export default function Form({
     if (entityId > 0) {
       Http.put(endpoint, entityId, body)
         .then(() => {
-          closeForm();
+          onSuccessCallback();
           alert("Deu bom o PUT");
         })
         .catch((error) => {
@@ -64,13 +64,18 @@ export default function Form({
     } else {
       Http.post(endpoint, body)
         .then(() => {
-          closeForm();
+          onSuccessCallback();
           alert("Deu bom o POST");
         })
         .catch((error) => {
           alert("Deu ruim o POST" + error);
         });
     }
+  };
+
+  const handleCancel = (event: any) => {
+    event?.preventDefault();
+    onCancelCallback();
   };
 
   const format = (formState: InputValidity) => {
@@ -82,9 +87,6 @@ export default function Form({
   };
   return (
     <form id={formId} onSubmit={handleSubmit}>
-      {/* <input type="number" id="id" hidden>
-        {entityId}
-      </input> */}
       {inputs.map((input) => {
         return (
           <Input
@@ -103,11 +105,7 @@ export default function Form({
       <button type="submit" disabled={!isFormValid}>
         Salvar
       </button>
-      <button
-        onClick={() => {
-          closeForm();
-        }}
-      >
+      <button type="button" onClick={handleCancel}>
         Cancelar
       </button>
     </form>

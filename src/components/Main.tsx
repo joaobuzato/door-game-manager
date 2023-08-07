@@ -1,6 +1,5 @@
 import ListRoom from "./Room/ListRoom";
-import ListDoor from "./Door/ListDoor";
-import Home from "./Home";
+import Home from "./Home/Home";
 import styles from "./Main.module.css";
 import Button from "./UI/Button";
 
@@ -19,7 +18,6 @@ export default function Main(props: {
       </Button>
       {props.activePage === "main" && <Home></Home>}
       {props.activePage === "listRoom" && <ListRoom></ListRoom>}
-      {props.activePage === "listDoor" && <ListDoor></ListDoor>}
     </main>
   );
 }

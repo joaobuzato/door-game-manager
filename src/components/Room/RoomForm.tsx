@@ -54,7 +54,8 @@ export default function RoomForm(props: {
     <div>
       <h1>My Form</h1>
       <Form
-        closeForm={cancelHandler}
+        onCancelCallback={cancelHandler}
+        onSuccessCallback={cancelHandler}
         formId="roomForm"
         endpoint="/rooms"
         entityId={props.room ? props.room.id : 0}
