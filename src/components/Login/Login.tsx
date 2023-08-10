@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import styles from "./Login.module.css";
 import Form from "../UI/Form";
@@ -33,8 +33,8 @@ const Login = () => {
     <div>
       <h1>Entrar</h1>
       <Form
-        onSuccessCallback={() => {
-          context.onLogin();
+        onSuccessCallback={(response: any) => {
+          context.onLogin(response);
         }}
         onCancelCallback={() => {
           console.log("Faça o login");

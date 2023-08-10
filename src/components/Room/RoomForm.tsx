@@ -52,7 +52,7 @@ export default function RoomForm(props: {
 
   return (
     <div>
-      <h1>My Form</h1>
+      <h1>{props.room ? "Edit Room" : "Insert Room"}</h1>
       <Form
         onCancelCallback={cancelHandler}
         onSuccessCallback={cancelHandler}

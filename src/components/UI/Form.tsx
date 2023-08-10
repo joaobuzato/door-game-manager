@@ -57,25 +57,29 @@ export default function Form({
     event.preventDefault();
     const body = format(formState);
     if (entityId > 0) {
-      Http.put(endpoint, entityId, body)
+      Http.put(endpoint, entityId, body, {
+        authorization: localStorage.getItem("token") ?? "",
+      })
         .then((response) => {
           if (response.status > 300) {
             alert("Alguma coisa deu errada ao salvar.");
             return;
           }
-          onSuccessCallback();
+          onSuccessCallback(response);
         })
         .catch((error) => {
           alert("Alguma coisa deu errado.");
         });
     } else {
-      Http.post(endpoint, body)
+      Http.post(endpoint, body, {
+        authorization: localStorage.getItem("token") || "",
+      })
         .then((response) => {
           if (response.status > 300) {
             alert("Alguma coisa deu errada ao salvar.");
             return;
           }
-          onSuccessCallback();
+          onSuccessCallback(response);
         })
         .catch((error) => {
           alert("Alguma coisa deu errado.");

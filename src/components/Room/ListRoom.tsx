@@ -11,7 +11,9 @@ export default function ListRoom() {
   const [form, setForm] = useState(<></>);
 
   useEffect(() => {
-    Http.get<Room>("/rooms", {}).then((responseRooms) => {
+    Http.get<Room>("/rooms", {
+      authorization: localStorage.getItem("token") ?? "",
+    }).then((responseRooms) => {
       setRooms(responseRooms);
     });
   }, [form]);
@@ -45,7 +47,9 @@ export default function ListRoom() {
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
-    Http.delete("/rooms", id)
+    Http.delete("/rooms", id, {
+      authorization: localStorage.getItem("token") || "",
+    })
       .then((response) => {
         if (response.status !== 200) return alert("Deu ruim");
         return alert("Deu bom!"); //TODO adicionar um unshift
