@@ -4,3 +4,5 @@ Projeto em React de um gestor da Door Game, que possui as funcionalidades de cad
 O objetivo final é poder construir um jogo em texto sem codificar, e no fim poder jogá-lo. 
 
 O projeto usa a door-game-api para construir as funcionalidades. 
+
+>=)
