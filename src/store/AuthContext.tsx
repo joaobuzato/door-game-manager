@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { eraseCookie, getCookie, setCookie } from "../cookie/cookieService";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -10,7 +11,7 @@ export const AuthContextProvider = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getCookie("door_game_token");
 
     if (token) {
       setIsLoggedIn(true);
@@ -19,12 +20,12 @@ export const AuthContextProvider = (props: any) => {
 
   const loginHandler = (response: any) => {
     const token = response.token;
-    localStorage.setItem("token", token);
+    setCookie("door_game_token", token, 1);
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("token");
+    eraseCookie("door_game_token");
     setIsLoggedIn(false);
   };
 

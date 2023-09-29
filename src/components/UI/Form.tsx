@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
 import Http from "../../http/Http";
+import { getCookie } from "../../cookie/cookieService";
 
 type FormProps = {
   saveButtonText?: string;
@@ -58,7 +59,7 @@ export default function Form({
     const body = format(formState);
     if (entityId > 0) {
       Http.put(endpoint, entityId, body, {
-        authorization: localStorage.getItem("token") ?? "",
+        authorization: getCookie("door_game_token") ?? "",
       })
         .then((response) => {
           if (response.status > 300) {
@@ -72,7 +73,7 @@ export default function Form({
         });
     } else {
       Http.post(endpoint, body, {
-        authorization: localStorage.getItem("token") || "",
+        authorization: getCookie("door_game_token") ?? "",
       })
         .then((response) => {
           if (response.status > 300) {

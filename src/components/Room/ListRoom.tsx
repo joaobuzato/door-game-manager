@@ -5,6 +5,7 @@ import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { getCookie } from "../../cookie/cookieService";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -12,7 +13,7 @@ export default function ListRoom() {
 
   useEffect(() => {
     Http.get<Room>("/rooms", {
-      authorization: localStorage.getItem("token") ?? "",
+      authorization: getCookie("door_game_token") ?? "",
     }).then((responseRooms) => {
       setRooms(responseRooms);
     });
@@ -31,7 +32,7 @@ export default function ListRoom() {
     return { isValid: true, message: "" };
   };
   const openForm = (room_id?: number) => {
-    const room = rooms.find((room) => Number(room.id) === room_id) || undefined;
+    const room = rooms.find((room) => Number(room.id) === room_id) ?? undefined;
     setForm(
       <RoomForm
         validate={validate}
@@ -48,11 +49,13 @@ export default function ListRoom() {
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
     Http.delete("/rooms", id, {
-      authorization: localStorage.getItem("token") || "",
+      authorization: getCookie("door_game_token") ?? "",
     })
       .then((response) => {
-        if (response.status !== 200) return alert("Deu ruim");
-        return alert("Deu bom!"); //TODO adicionar um unshift
+        if (response.status > 300) return alert("Deu ruim");
+        setRooms((oldRooms) => {
+          return oldRooms.filter((room) => room.id !== id);
+        });
       })
       .catch(() => {
         alert("Deu Ruim ):");
