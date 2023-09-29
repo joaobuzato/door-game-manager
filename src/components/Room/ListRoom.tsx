@@ -3,9 +3,8 @@ import Http from "../../http/Http";
 import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { getCookie } from "../../cookie/cookieService";
+import RoomItem from "./RoomItem";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -31,6 +30,7 @@ export default function ListRoom() {
     }
     return { isValid: true, message: "" };
   };
+
   const openForm = (room_id?: number) => {
     const room = rooms.find((room) => Number(room.id) === room_id) ?? undefined;
     setForm(
@@ -75,26 +75,12 @@ export default function ListRoom() {
         </tr>
         {rooms.map((room) => {
           return (
-            <tr key={room.id}>
-              <td>{room.title}</td>
-              <td>{room.path}</td>
-              <td className={styles.actions}>
-                <button
-                  className={styles.button}
-                  value={room.id}
-                  onClick={editHandler}
-                >
-                  <FontAwesomeIcon icon={faPen} />
-                </button>
-                <button
-                  className={styles.button}
-                  value={room.id}
-                  onClick={deleteHandler}
-                >
-                  <FontAwesomeIcon icon={faTrashCan} />
-                </button>
-              </td>
-            </tr>
+            <RoomItem
+              key={room.id}
+              room={room}
+              onDelete={deleteHandler}
+              onEdit={editHandler}
+            ></RoomItem>
           );
         })}
       </table>

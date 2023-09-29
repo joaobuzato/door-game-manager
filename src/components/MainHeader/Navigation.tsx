@@ -6,13 +6,11 @@ const Navigation = () => {
   const context = useContext(AuthContext);
   return (
     <nav className={styles.nav}>
-      <ul>
-        {context.isLoggedIn && (
-          <li>
-            <button onClick={context.onLogout}>Logout</button>
-          </li>
-        )}
-      </ul>
+      {context.isLoggedIn && (
+        <button className={styles.button} onClick={context.onLogout}>
+          Logout
+        </button>
+      )}
     </nav>
   );
 };

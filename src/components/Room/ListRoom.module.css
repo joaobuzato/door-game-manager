@@ -1,26 +1,8 @@
 .table {
-    border: 1px black solid;
-    padding: 10px;
-    border-radius: 3px;
-}
-
-.table tr {
-    border-radius: 10px solid black;
-}
-
-.actions {
-    width: 120px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.button {
-   
-    margin-left: 10px;
-    background-color: #04AA6D;
-    width: 44px;
-    height: 44px;
-    font-size: x-small;
+  border: 1px black solid;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  min-width: 500px;
+  background-color: #f0f0f0;
 }

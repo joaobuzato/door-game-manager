@@ -1,15 +1,13 @@
 .nav {
-    display: flex;
-    align-items: start;
-    width: 100%;
-    height: 6vh;
-    background-color: #282A35;
+  display: flex;
+  align-items: start;
+  width: 100%;
+  height: 6vh;
+  background-color: #282a35;
+  justify-content: end;
 }
 
-.nav ul{
-    display: flex;
-    justify-content: end;
-    padding-right: 50px;
-    height: 100%;
-    width: 100%;
+.button {
+  padding: 3px;
+  margin: 3px;
 }
