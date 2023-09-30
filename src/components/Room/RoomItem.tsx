@@ -16,7 +16,7 @@ export default function RoomItem(props: {
   };
 
   return (
-    <tr className={styles.item} key={props.room.id}>
+    <tr>
       <td>{props.room.title}</td>
       <td>{props.room.path}</td>
       <td className={styles.actions}>

@@ -35,7 +35,7 @@ export default function ListRoom() {
   const openForm = (room_id?: number) => {
     const room = rooms.find((room) => Number(room.id) === room_id) ?? undefined;
     setForm(
-      <Modal>
+      <Modal onCloseModal={closeForm}>
         <RoomForm
           validate={validate}
           closeForm={closeForm}
@@ -73,21 +73,25 @@ export default function ListRoom() {
         Add New Room
       </Button>
       <table className={styles.table}>
-        <tr>
-          <th>Title</th>
-          <th>Path</th>
-          <th>Actions</th>
-        </tr>
-        {rooms.map((room) => {
-          return (
-            <RoomItem
-              key={room.id}
-              room={room}
-              onDelete={deleteHandler}
-              onEdit={editHandler}
-            ></RoomItem>
-          );
-        })}
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Path</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rooms.map((room) => {
+            return (
+              <RoomItem
+                key={room.id}
+                room={room}
+                onDelete={deleteHandler}
+                onEdit={editHandler}
+              ></RoomItem>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
