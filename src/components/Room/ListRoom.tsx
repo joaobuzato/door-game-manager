@@ -7,6 +7,7 @@ import { getCookie } from "../../cookie/cookieService";
 import { getAll } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
+import Modal from "../UI/Modal";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -34,11 +35,13 @@ export default function ListRoom() {
   const openForm = (room_id?: number) => {
     const room = rooms.find((room) => Number(room.id) === room_id) ?? undefined;
     setForm(
-      <RoomForm
-        validate={validate}
-        closeForm={closeForm}
-        room={room ?? undefined}
-      ></RoomForm>
+      <Modal>
+        <RoomForm
+          validate={validate}
+          closeForm={closeForm}
+          room={room ?? undefined}
+        ></RoomForm>
+      </Modal>
     );
   };
 
