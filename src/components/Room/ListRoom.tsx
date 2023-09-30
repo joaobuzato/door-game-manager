@@ -4,6 +4,7 @@ import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
 import { getCookie } from "../../cookie/cookieService";
+import { getAllRooms } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
 
@@ -12,9 +13,7 @@ export default function ListRoom() {
   const [form, setForm] = useState(<></>);
 
   useEffect(() => {
-    Http.get<Room>("/rooms", {
-      authorization: getCookie("door_game_token") ?? "",
-    }).then((responseRooms) => {
+    getAllRooms().then((responseRooms) => {
       setRooms(responseRooms);
     });
   }, [form]);
@@ -64,7 +63,7 @@ export default function ListRoom() {
   };
 
   return (
-    <>
+    <div className={styles["list-room"]}>
       {form}
       <h2>Rooms List</h2>
       <Button onClick={() => openForm()} value={"Add New Room"}>
@@ -87,6 +86,6 @@ export default function ListRoom() {
           );
         })}
       </table>
-    </>
+    </div>
   );
 }

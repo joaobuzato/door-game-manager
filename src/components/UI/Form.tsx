@@ -11,6 +11,7 @@ type FormProps = {
   endpoint: string;
   formId: string;
   entityId: number;
+  errorMsg?: string;
   inputs: {
     label: string;
     type: string;
@@ -62,6 +63,10 @@ export default function Form({
         authorization: getCookie("door_game_token") ?? "",
       })
         .then((response) => {
+          if (response.status === 403) {
+            alert("faça o login novamente.");
+            return;
+          }
           if (response.status > 300) {
             alert("Alguma coisa deu errada ao salvar.");
             return;
@@ -76,6 +81,10 @@ export default function Form({
         authorization: getCookie("door_game_token") ?? "",
       })
         .then((response) => {
+          if (response.status === 403) {
+            alert("faça o login novamente.");
+            return;
+          }
           if (response.status > 300) {
             alert("Alguma coisa deu errada ao salvar.");
             return;
