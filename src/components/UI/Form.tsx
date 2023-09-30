@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
-import Http from "../../http/Http";
-import { getCookie } from "../../cookie/cookieService";
+import { edit, save } from "../../clients/doorApiClient";
 
 type FormProps = {
   saveButtonText?: string;
@@ -55,52 +54,6 @@ export default function Form({
     }
     setIsFormValid(true);
   };
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    const body = format(formState);
-    if (entityId > 0) {
-      Http.put(endpoint, entityId, body, {
-        authorization: getCookie("door_game_token") ?? "",
-      })
-        .then((response) => {
-          if (response.status === 403) {
-            alert("faça o login novamente.");
-            return;
-          }
-          if (response.status > 300) {
-            alert("Alguma coisa deu errada ao salvar.");
-            return;
-          }
-          onSuccessCallback(response);
-        })
-        .catch((error) => {
-          alert("Alguma coisa deu errado.");
-        });
-    } else {
-      Http.post(endpoint, body, {
-        authorization: getCookie("door_game_token") ?? "",
-      })
-        .then((response) => {
-          if (response.status === 403) {
-            alert("faça o login novamente.");
-            return;
-          }
-          if (response.status > 300) {
-            alert("Alguma coisa deu errada ao salvar.");
-            return;
-          }
-          onSuccessCallback(response);
-        })
-        .catch((error) => {
-          alert("Alguma coisa deu errado.");
-        });
-    }
-  };
-
-  const handleCancel = (event: any) => {
-    event?.preventDefault();
-    onCancelCallback();
-  };
 
   const format = (formState: InputValidity) => {
     const result: { [key: string]: string } = {};
@@ -109,6 +62,22 @@ export default function Form({
     }
     return { ...result };
   };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const body = format(formState);
+    if (entityId > 0) {
+      const response = edit(endpoint, entityId, body, onSuccessCallback);
+    } else {
+      const response = save(endpoint, body, onSuccessCallback);
+    }
+  };
+
+  const handleCancel = (event: any) => {
+    event?.preventDefault();
+    onCancelCallback();
+  };
+
   return (
     <form id={formId} onSubmit={handleSubmit}>
       {inputs.map((input) => {

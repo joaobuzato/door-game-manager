@@ -4,7 +4,7 @@ import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
 import { getCookie } from "../../cookie/cookieService";
-import { getAllRooms } from "../../clients/doorApiClient";
+import { getAll } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
 
@@ -13,7 +13,7 @@ export default function ListRoom() {
   const [form, setForm] = useState(<></>);
 
   useEffect(() => {
-    getAllRooms().then((responseRooms) => {
+    getAll("/rooms").then((responseRooms) => {
       setRooms(responseRooms);
     });
   }, [form]);
