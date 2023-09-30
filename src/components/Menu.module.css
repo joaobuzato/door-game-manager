@@ -1,26 +1,24 @@
 .aside {
- 
-  background-color: #E7E9EB;
+  background-color: #e7e9eb;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 300px;
+  min-width: 200px;
 }
 
 .aside button {
-    all:unset;
-    background-color: #E7E9EB;
-    width: 100%;
-    text-align: center;
-    font-size: 17px;
-    height:40px;
-
+  all: unset;
+  background-color: #e7e9eb;
+  min-width: 100%;
+  text-align: center;
+  font-size: 17px;
+  min-height: 40px;
 }
 .aside button:hover {
-    filter: brightness(85%);
-    cursor:pointer;
+  filter: brightness(85%);
+  cursor: pointer;
 }
 
 .selected {
-    background: #04AA6D !important;
+  background: #04aa6d !important;
 }

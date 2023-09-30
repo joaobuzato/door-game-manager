@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import styles from "./Header.module.css";
 import Navigation from "./Navigation";
 

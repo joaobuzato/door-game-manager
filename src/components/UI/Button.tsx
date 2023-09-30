@@ -5,13 +5,14 @@ type ButtonProps = {
   value: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
+  className?: string;
 };
 
 export default function Button(props: ButtonProps) {
   return (
     <button
       value={props.value}
-      className={styles.button}
+      className={`${styles.button} ${props.className}`}
       onClick={props.onClick}
     >
       {props.children}

@@ -20,12 +20,12 @@ export default function Menu(props: {
           Rooms
         </button>
         <button
-          className={props.activePage === "listDoor" ? styles.selected : ""}
-          key="listDoor"
-          value="listDoor"
+          className={props.activePage === "about" ? styles.selected : ""}
+          key="about "
+          value="about"
           onClick={setActivePageHandler}
         >
-          Doors
+          About
         </button>
       </aside>
     </>

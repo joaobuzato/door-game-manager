@@ -2,6 +2,8 @@ import ListRoom from "./Room/ListRoom";
 import Home from "./Home/Home";
 import styles from "./Main.module.css";
 import Button from "./UI/Button";
+import About from "./About/About";
+import Card from "./UI/Card";
 
 export default function Main(props: {
   name: string;
@@ -13,11 +15,14 @@ export default function Main(props: {
   };
   return (
     <main className={styles.main}>
-      <Button value="main" onClick={setPageHandler}>
+      <Card>
+        {props.activePage === "main" && <Home></Home>}
+        {props.activePage === "listRoom" && <ListRoom></ListRoom>}
+        {props.activePage === "about" && <About></About>}
+      </Card>
+      <Button className={styles.back} value="main" onClick={setPageHandler}>
         {"< Voltar ao início"}
       </Button>
-      {props.activePage === "main" && <Home></Home>}
-      {props.activePage === "listRoom" && <ListRoom></ListRoom>}
     </main>
   );
 }

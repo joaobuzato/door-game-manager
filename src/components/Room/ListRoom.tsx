@@ -5,6 +5,7 @@ import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
 import { getCookie } from "../../cookie/cookieService";
 import RoomItem from "./RoomItem";
+import Button from "../UI/Button";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -66,7 +67,9 @@ export default function ListRoom() {
     <>
       {form}
       <h2>Rooms List</h2>
-      <button onClick={() => openForm()}>Add New Room</button>
+      <Button onClick={() => openForm()} value={"Add New Room"}>
+        Add New Room
+      </Button>
       <table className={styles.table}>
         <tr>
           <th>Title</th>
