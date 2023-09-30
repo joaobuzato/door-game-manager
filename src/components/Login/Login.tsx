@@ -3,6 +3,8 @@ import { useContext } from "react";
 import styles from "./Login.module.css";
 import Form from "../UI/Form";
 import AuthContext from "../../store/AuthContext";
+import Card from "../UI/Card";
+import Modal from "../UI/Modal";
 
 const Login = () => {
   const context = useContext(AuthContext);
@@ -30,22 +32,24 @@ const Login = () => {
     // Add more input configurations as needed
   ];
   return (
-    <div>
-      <h1>Entrar</h1>
-      <Form
-        onSuccessCallback={(response: any) => {
-          context.onLogin(response);
-        }}
-        onCancelCallback={() => {
-          console.log("Faça o login");
-        }}
-        formId="login"
-        endpoint="/auth"
-        inputs={formInputs}
-        entityId={0}
-        saveButtonText="Login"
-      />
-    </div>
+    <Modal>
+      <div className={styles.login}>
+        <h1>Entrar</h1>
+        <Form
+          onSuccessCallback={(response: any) => {
+            context.onLogin(response);
+          }}
+          onCancelCallback={() => {
+            console.log("Faça o login");
+          }}
+          formId="login"
+          endpoint="/auth"
+          inputs={formInputs}
+          entityId={0}
+          saveButtonText="Login"
+        />
+      </div>
+    </Modal>
   );
 };
 

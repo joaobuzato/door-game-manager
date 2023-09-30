@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
 import { edit, save } from "../../clients/doorApiClient";
+import styles from "./Form.module.css";
 
 type FormProps = {
   saveButtonText?: string;
@@ -79,7 +80,7 @@ export default function Form({
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit}>
+    <form className={styles.form} id={formId} onSubmit={handleSubmit}>
       {inputs.map((input) => {
         return (
           <Input
