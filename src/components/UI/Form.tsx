@@ -18,6 +18,7 @@ type FormProps = {
     type: string;
     placeholder: string;
     id: string;
+    hidden?: boolean;
     value: string;
 
     validation?: ValidationOpts;
@@ -86,6 +87,7 @@ export default function Form({
       {inputs.map((input) => {
         return (
           <Input
+            hidden={input.hidden}
             key={input.id}
             label={input.label}
             type={input.type}

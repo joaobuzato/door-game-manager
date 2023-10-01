@@ -10,6 +10,7 @@ export type ValidationOpts = {
 
 export default function Input(props: {
   label: string;
+  hidden?: boolean;
   type: string;
   placeholder: string;
   id: string;
@@ -71,7 +72,10 @@ export default function Input(props: {
 
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor={props.id} className={styles.label}>
+      <label
+        htmlFor={props.id}
+        className={`${styles.label} ${props.hidden ? styles.hidden : ""}`}
+      >
         {props.label}
         <input
           className={styles.input}
