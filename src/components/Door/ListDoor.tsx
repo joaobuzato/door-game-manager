@@ -10,7 +10,7 @@ export default function ListDoor(props: {
   roomId: number;
   doors: Array<Door>;
 }) {
-  const [doors, setDoors] = useState(Array<Door>);
+  const [doors, setDoors] = useState(props.doors);
   const [form, setForm] = useState(<></>);
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

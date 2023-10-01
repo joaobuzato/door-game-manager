@@ -10,6 +10,7 @@ import Modal from "../UI/Modal";
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
   const [form, setForm] = useState(<></>);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     getAllItems<Room>("/rooms").then((responseRooms) => {
@@ -32,18 +33,18 @@ export default function ListRoom() {
 
   const openForm = (room_id?: number) => {
     const room = rooms.find((room) => Number(room.id) === room_id) ?? undefined;
+    setIsFormOpen(true);
     setForm(
-      <Modal onCloseModal={closeForm}>
-        <RoomForm
-          validate={validate}
-          closeForm={closeForm}
-          room={room ?? undefined}
-        ></RoomForm>
-      </Modal>
+      <RoomForm
+        validate={validate}
+        closeForm={closeForm}
+        room={room ?? undefined}
+      ></RoomForm>
     );
   };
 
   const closeForm = () => {
+    setIsFormOpen(false);
     setForm(<></>);
   };
 
@@ -57,32 +58,37 @@ export default function ListRoom() {
 
   return (
     <div className={styles["list-room"]}>
-      {form}
-      <h2>Rooms List</h2>
-      <Button onClick={() => openForm()} value={"Add New Room"}>
-        Add New Room
-      </Button>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Path</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room) => {
-            return (
-              <RoomItem
-                key={room.id}
-                room={room}
-                onDelete={deleteHandler}
-                onEdit={editHandler}
-              ></RoomItem>
-            );
-          })}
-        </tbody>
-      </table>
+      {isFormOpen ? (
+        form
+      ) : (
+        <>
+          <h2>Rooms List</h2>
+          <Button onClick={() => openForm()} value={"Add New Room"}>
+            Add New Room
+          </Button>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Path</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rooms.map((room) => {
+                return (
+                  <RoomItem
+                    key={room.id}
+                    room={room}
+                    onDelete={deleteHandler}
+                    onEdit={editHandler}
+                  ></RoomItem>
+                );
+              })}
+            </tbody>
+          </table>
+        </>
+      )}
     </div>
   );
 }

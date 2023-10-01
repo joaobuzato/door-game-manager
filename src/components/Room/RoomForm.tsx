@@ -40,7 +40,6 @@ export default function RoomForm(props: {
         required: true,
       },
     },
-    // Add more input configurations as needed
   ];
 
   const cancelHandler = () => {
