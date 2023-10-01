@@ -6,7 +6,10 @@ import DoorItem from "./DoorItem";
 import Button from "../UI/Button";
 import styles from "./ListDoor.module.css";
 
-export default function ListDoor(props: { doors: Array<Door> }) {
+export default function ListDoor(props: {
+  roomId: number;
+  doors: Array<Door>;
+}) {
   const [doors, setDoors] = useState(Array<Door>);
   const [form, setForm] = useState(<></>);
 

@@ -58,7 +58,12 @@ export default function RoomForm(props: {
         entityId={props.room ? props.room.id : 0}
         inputs={formInputs}
       />
-      <ListDoor doors={props.room?.doors ?? []}></ListDoor>
+      {props.room && (
+        <ListDoor
+          roomId={props.room?.id ?? 0}
+          doors={props.room?.doors ?? []}
+        ></ListDoor>
+      )}
     </div>
   );
 }
