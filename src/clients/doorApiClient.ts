@@ -1,19 +1,26 @@
 import { getCookie } from "../cookie/cookieService";
 import Http from "../http/Http";
-import { Room } from "../types";
 
-const getAll = async (endpoint: string) => {
-  const responseRooms = await Http.get<Room>(endpoint, {
+async function getAllItems<T>(endpoint: string) {
+  return Http.get<T>(endpoint, {
     authorization: getCookie("door_game_token") ?? "",
-  });
-  return responseRooms;
-};
+  })
+    .then((response: T[]) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("erro ao obter.");
+      return [];
+    });
+}
 
-const edit = async (
+const editItem = async (
   endpoint: string,
   entityId: number,
   body: {},
-  onSuccessCallback: Function
+  onSuccessCallback: Function,
+  onErrorCallback: Function
 ) => {
   return Http.put(endpoint, entityId, body, {
     authorization: getCookie("door_game_token") ?? "",
@@ -21,10 +28,12 @@ const edit = async (
     .then((response) => {
       if (response.status === 403) {
         alert("faça o login novamente.");
-        return;
+        onErrorCallback(response);
       }
       if (response.status > 300) {
         alert("Alguma coisa deu errada ao salvar.");
+        onErrorCallback(response);
+        return;
       }
       onSuccessCallback(response);
     })
@@ -33,21 +42,23 @@ const edit = async (
     });
 };
 
-const save = async (
+const saveItem = async (
   endpoint: string,
   body: {},
-  onSuccessCallback: Function
+  onSuccessCallback: Function,
+  onErrorCallback: Function
 ) => {
   return Http.post(endpoint, body, {
     authorization: getCookie("door_game_token") ?? "",
   })
     .then((response) => {
       if (response.status === 403) {
-        alert("faça o login novamente.");
-        return;
+        onErrorCallback(response);
+        return false;
       }
       if (response.status > 300) {
-        alert("Alguma coisa deu errada ao salvar.");
+        onErrorCallback(response);
+        return false;
       }
       onSuccessCallback(response);
     })
@@ -61,11 +72,16 @@ const deleteItem = async (endpoint: string, id: number) => {
     authorization: getCookie("door_game_token") ?? "",
   })
     .then((response) => {
-      if (response.status > 300) return alert("Deu ruim");
+      if (response.status > 300) {
+        alert("Deu ruim");
+        return false;
+      }
+      return true;
     })
     .catch(() => {
       alert("Deu Ruim ):");
+      return false;
     });
 };
 
-export { getAll, edit, save, deleteItem };
+export { getAllItems, editItem, saveItem, deleteItem };

@@ -53,6 +53,7 @@ export default function RoomForm(props: {
       <Form
         onCancelCallback={cancelHandler}
         onSuccessCallback={cancelHandler}
+        onErrorCallback={cancelHandler}
         formId="roomForm"
         endpoint="/rooms"
         entityId={props.room ? props.room.id : 0}

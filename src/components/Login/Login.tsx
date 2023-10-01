@@ -39,6 +39,9 @@ const Login = () => {
           onSuccessCallback={(response: any) => {
             context.onLogin(response);
           }}
+          onErrorCallback={(response: any) => {
+            alert("Erro ao fazer login");
+          }}
           onCancelCallback={() => {
             console.log("Faça o login");
           }}

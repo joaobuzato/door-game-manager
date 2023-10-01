@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
-import { edit, save } from "../../clients/doorApiClient";
+import { editItem, saveItem } from "../../clients/doorApiClient";
 import styles from "./Form.module.css";
 
 type FormProps = {
@@ -8,6 +8,7 @@ type FormProps = {
   cancelButtonText?: string;
   onCancelCallback: Function;
   onSuccessCallback: Function;
+  onErrorCallback: Function;
   endpoint: string;
   formId: string;
   entityId: number;
@@ -29,6 +30,7 @@ export default function Form({
   cancelButtonText,
   onCancelCallback,
   onSuccessCallback,
+  onErrorCallback,
   endpoint,
   entityId,
   formId,
@@ -68,9 +70,9 @@ export default function Form({
     event.preventDefault();
     const body = format(formState);
     if (entityId > 0) {
-      const response = edit(endpoint, entityId, body, onSuccessCallback);
+      editItem(endpoint, entityId, body, onSuccessCallback, onErrorCallback);
     } else {
-      const response = save(endpoint, body, onSuccessCallback);
+      saveItem(endpoint, body, onSuccessCallback, onErrorCallback);
     }
   };
 

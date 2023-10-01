@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Http from "../../http/Http";
 import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
-import { getCookie } from "../../cookie/cookieService";
-import { deleteItem, getAll } from "../../clients/doorApiClient";
+import { deleteItem, getAllItems } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
@@ -14,7 +12,7 @@ export default function ListRoom() {
   const [form, setForm] = useState(<></>);
 
   useEffect(() => {
-    getAll("/rooms").then((responseRooms) => {
+    getAllItems<Room>("/rooms").then((responseRooms) => {
       setRooms(responseRooms);
     });
   }, [form]);
