@@ -1,9 +1,6 @@
-// import styles from "./RoomForm.module.css";
 import { Room } from "../../types";
+import ListDoor from "../Door/ListDoor";
 import Form from "../UI/Form";
-// import { useState } from "react";
-// import Http from "../../http/Http";
-// import Input from "../UI/Input";
 
 export default function RoomForm(props: {
   room?: Room;
@@ -61,6 +58,7 @@ export default function RoomForm(props: {
         entityId={props.room ? props.room.id : 0}
         inputs={formInputs}
       />
+      <ListDoor doors={props.room?.doors ?? []}></ListDoor>
     </div>
   );
 }

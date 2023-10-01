@@ -56,4 +56,16 @@ const save = async (
     });
 };
 
-export { getAll, edit, save };
+const deleteItem = async (endpoint: string, id: number) => {
+  return Http.delete(endpoint, id, {
+    authorization: getCookie("door_game_token") ?? "",
+  })
+    .then((response) => {
+      if (response.status > 300) return alert("Deu ruim");
+    })
+    .catch(() => {
+      alert("Deu Ruim ):");
+    });
+};
+
+export { getAll, edit, save, deleteItem };

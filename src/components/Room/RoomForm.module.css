@@ -1,13 +1,13 @@
 .form {
-    margin: 30px;
-    padding:30px;
-    width: 60%;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: 30px;
+  padding: 30px;
+  width: 60%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .id {
-    display: none;
+  display: none;
 }

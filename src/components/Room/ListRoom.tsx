@@ -4,7 +4,7 @@ import { Room } from "../../types";
 import RoomForm from "./RoomForm";
 import styles from "./ListRoom.module.css";
 import { getCookie } from "../../cookie/cookieService";
-import { getAll } from "../../clients/doorApiClient";
+import { deleteItem, getAll } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
@@ -51,18 +51,10 @@ export default function ListRoom() {
 
   const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.value);
-    Http.delete("/rooms", id, {
-      authorization: getCookie("door_game_token") ?? "",
-    })
-      .then((response) => {
-        if (response.status > 300) return alert("Deu ruim");
-        setRooms((oldRooms) => {
-          return oldRooms.filter((room) => room.id !== id);
-        });
-      })
-      .catch(() => {
-        alert("Deu Ruim ):");
-      });
+    deleteItem("/rooms", id);
+    setRooms((oldRooms) => {
+      return oldRooms.filter((room) => room.id !== id);
+    });
   };
 
   return (
