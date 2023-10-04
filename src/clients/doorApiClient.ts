@@ -1,9 +1,13 @@
 import { getCookie } from "../cookie/cookieService";
 import Http from "../http/Http";
 
-async function getAllItems<T>(endpoint: string) {
+async function getAllItems<T>(
+  endpoint: string,
+  filters?: { [key: string]: string }
+) {
   return Http.get<T>(endpoint, {
     authorization: getCookie("door_game_token") ?? "",
+    ...filters,
   })
     .then((response: T[]) => {
       return response;

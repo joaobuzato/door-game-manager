@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Door } from "../../types";
-import { deleteItem } from "../../clients/doorApiClient";
+import { deleteItem, getAllItems } from "../../clients/doorApiClient";
 import DoorItem from "./DoorItem";
 import Button from "../UI/Button";
 import styles from "./ListDoor.module.css";
@@ -13,6 +13,14 @@ export default function ListDoor(props: {
   const [doors, setDoors] = useState(props.doors);
   const [form, setForm] = useState(<></>);
   const [isFormOpen, setIsFormOpen] = useState(false);
+
+  useEffect(() => {
+    getAllItems<Door>("/doors", { roomId: String(props.roomId) }).then(
+      (response) => {
+        setDoors(response);
+      }
+    );
+  }, [form]);
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const door_id = Number(event.currentTarget.value);
