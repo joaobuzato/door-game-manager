@@ -5,7 +5,6 @@ import styles from "./ListRoom.module.css";
 import { deleteItem, getAllItems } from "../../clients/doorApiClient";
 import RoomItem from "./RoomItem";
 import Button from "../UI/Button";
-import Modal from "../UI/Modal";
 
 export default function ListRoom() {
   const [rooms, setRooms] = useState(Array<Room>);
@@ -62,9 +61,9 @@ export default function ListRoom() {
         form
       ) : (
         <>
-          <h2>Rooms List</h2>
+          <h2>Lista de quartos</h2>
           <Button onClick={() => openForm()} value={"Add New Room"}>
-            Add New Room
+            Adicionar novo quarto
           </Button>
           <table className={styles.table}>
             <thead>

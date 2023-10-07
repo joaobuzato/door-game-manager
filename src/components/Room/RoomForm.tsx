@@ -1,5 +1,6 @@
 import { Room } from "../../types";
 import ListDoor from "../Door/ListDoor";
+import ListExtendedText from "../ExtendedText/ListExtendedText";
 import Form from "../UI/Form";
 
 export default function RoomForm(props: {
@@ -48,7 +49,7 @@ export default function RoomForm(props: {
 
   return (
     <div>
-      <h1>{props.room ? "Edit Room" : "Insert Room"}</h1>
+      <h1>{props.room ? "Editar um Quarto" : "Inserir um novo quarti"}</h1>
       <Form
         onCancelCallback={cancelHandler}
         onSuccessCallback={cancelHandler}
@@ -59,10 +60,16 @@ export default function RoomForm(props: {
         inputs={formInputs}
       />
       {props.room && (
-        <ListDoor
-          roomId={props.room?.id ?? 0}
-          doors={props.room?.doors ?? []}
-        ></ListDoor>
+        <>
+          <ListDoor
+            roomId={props.room?.id ?? 0}
+            doors={props.room?.doors ?? []}
+          ></ListDoor>
+          <ListExtendedText
+            roomId={props.room?.id ?? 0}
+            extendedTexts={props.room?.extendedTexts ?? []}
+          />
+        </>
       )}
     </div>
   );

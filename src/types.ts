@@ -5,7 +5,7 @@ export type Room = {
   path: string;
   doors?: Door[];
   actions?: Action[];
-  expandedTexts?: ExtendedText[];
+  extendedTexts?: ExtendedText[];
 };
 
 export type ExtendedText = {

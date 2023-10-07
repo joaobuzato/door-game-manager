@@ -20,12 +20,13 @@ export default function ListDoor(props: {
         setDoors(response);
       }
     );
-  }, [form]);
+  }, [form, props.roomId]);
 
   const editHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const door_id = Number(event.currentTarget.value);
     openForm(door_id);
   };
+
   const openForm = (door_id?: number) => {
     const door = doors.find((door) => Number(door.id) === door_id) ?? undefined;
     setIsFormOpen(true);
@@ -51,15 +52,16 @@ export default function ListDoor(props: {
     setForm(<></>);
     setIsFormOpen(false);
   };
+
   return (
     <div className={styles["list-door"]}>
       {isFormOpen ? (
         form
       ) : (
         <>
-          <h3>Doors List</h3>
+          <h3>Lista de portas existentes</h3>
           <Button onClick={() => openForm()} value={"Add New Door"}>
-            Add New Door
+            Adicionar uma nova porta
           </Button>
           <table className={styles.table}>
             <thead>
