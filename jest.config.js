@@ -2,7 +2,7 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
-  testMatch: ["**/**/*.test.tsx"],
+  testMatch: ["**/**/*.test.tsx", "**/**/*.test.ts"],
   moduleNameMapper: {
     "\\.(css|less)$": "jest-css-modules",
   },
