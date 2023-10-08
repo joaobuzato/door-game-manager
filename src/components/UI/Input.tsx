@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InvalidInput from "./InvalidInput";
 import styles from "./Input.module.css";
+import React from "react";
 
 export type ValidationOpts = {
   required?: boolean;
