@@ -3,7 +3,7 @@ import { useContext } from "react";
 import styles from "./Login.module.css";
 import Form from "../UI/Form";
 import AuthContext from "../../store/AuthContext";
-import Card from "../UI/Card";
+
 import Modal from "../UI/Modal";
 
 const Login = () => {

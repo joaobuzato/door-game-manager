@@ -1,5 +1,3 @@
-import Card from "../UI/Card";
-
 export default function About() {
   return (
     <>
