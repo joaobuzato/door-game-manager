@@ -5,10 +5,13 @@ async function getAllItems<T>(
   endpoint: string,
   filters?: { [key: string]: string | number }
 ) {
-  return Http.get<T>(endpoint, {
-    authorization: getCookie("door_game_token") ?? "",
-    ...filters,
-  })
+  return Http.get<T>(
+    endpoint,
+    {
+      authorization: getCookie("door_game_token") ?? "",
+    },
+    filters
+  )
     .then((response: T[]) => {
       return response;
     })
@@ -33,6 +36,7 @@ const editItem = async (
       if (response.status === 403) {
         alert("faça o login novamente.");
         onErrorCallback(response);
+        return;
       }
       if (response.status > 300) {
         alert("Alguma coisa deu errada ao salvar.");
