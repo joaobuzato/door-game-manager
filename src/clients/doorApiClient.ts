@@ -61,10 +61,12 @@ const saveItem = async (
   })
     .then((response) => {
       if (response.status === 403) {
+        alert("faça o login novamente.");
         onErrorCallback(response);
         return false;
       }
       if (response.status > 300) {
+        alert("Alguma coisa deu errada ao salvar.");
         onErrorCallback(response);
         return false;
       }
@@ -80,14 +82,18 @@ const deleteItem = async (endpoint: string, id: number) => {
     authorization: getCookie("door_game_token") ?? "",
   })
     .then((response) => {
+      if (response.status === 403) {
+        alert("faça o login novamente.");
+        return false;
+      }
       if (response.status > 300) {
-        alert("Deu ruim");
+        alert("Alguma coisa deu errada ao salvar.");
         return false;
       }
       return true;
     })
     .catch(() => {
-      alert("Deu Ruim ):");
+      alert("Alguma coisa deu errado.");
       return false;
     });
 };
