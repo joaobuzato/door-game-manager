@@ -3,7 +3,7 @@ import Http from "../http/Http";
 
 async function getAllItems<T>(
   endpoint: string,
-  filters?: { [key: string]: string }
+  filters?: { [key: string]: string | number }
 ) {
   return Http.get<T>(endpoint, {
     authorization: getCookie("door_game_token") ?? "",

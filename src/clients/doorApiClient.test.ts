@@ -5,31 +5,42 @@ import { Room } from "../types";
 import Http from "../http/Http";
 jest.mock("../http/Http");
 
-const getValues = [
+type ExampleType = {
+  everything: string;
+  everywhere: number;
+  all: { at: string };
+  once: number[];
+};
+
+const getValues: ExampleType[] = [
   {
-    id: 17,
-    title: "dfgsdgsf",
-    text: "dfgdfg",
-    path: "dfg",
-    actions: [],
-    extendedTexts: [],
-    doors: [],
+    everything: "everything",
+    everywhere: 3,
+    all: { at: "at" },
+    once: [1, 2, 3, 4],
   },
 ];
 describe("Door API Client", () => {
   let getSpy: jest.SpyInstance;
   beforeAll(() => {
     getSpy = jest.spyOn(Http, "get");
+    window.alert = jest.fn();
   });
-  beforeEach(() => {
-    getSpy.mockResolvedValue(getValues);
-  });
+  beforeEach(() => {});
   afterEach(() => {
     getSpy.mockClear();
   });
   test("should getAllItems", async () => {
-    const result = await getAllItems<Room>("/rooms");
+    getSpy.mockResolvedValue(getValues);
+    const result = await getAllItems<ExampleType>("/endpoint");
     expect(Http.get).toBeCalledTimes(1);
     expect(result).toBe(getValues);
+  });
+  test("should return [] on getAllItems error", async () => {
+    getSpy.mockRejectedValueOnce("error");
+    const result = await getAllItems<ExampleType>("/endpoint");
+    expect(Http.get).toBeCalledTimes(1);
+    expect(window.alert).toBeCalledTimes(1);
+    expect(result).toEqual([]);
   });
 });
