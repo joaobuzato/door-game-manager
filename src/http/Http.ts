@@ -4,9 +4,10 @@ const BASE_URL = "http://localhost:8080";
 export default class Http {
   static _urlBuilder(
     baseUrl: string,
+    endpoint: string,
     filters?: { [key: string]: string | number }
   ) {
-    let url = baseUrl + "?";
+    let url = baseUrl + endpoint + "?";
     for (const key in filters) {
       url = url.concat(`${key}=${filters[key]}&`);
     }
@@ -19,7 +20,7 @@ export default class Http {
     filters?: { [key: string]: string | number }
   ): Promise<Array<T>> {
     const response = await fetch(
-      this._urlBuilder(BASE_URL, filters) + endpoint,
+      this._urlBuilder(BASE_URL, endpoint, filters),
       {
         method: "GET",
         headers: { authorization: headers.authorization },
