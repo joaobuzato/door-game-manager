@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import InvalidInput from "./InvalidInput";
 import styles from "./Input.module.css";
-import React from "react";
 
 export type ValidationOpts = {
   required?: boolean;
@@ -19,7 +18,7 @@ export default function Input(props: {
   validation?: ValidationOpts;
   onChange: Function;
 }) {
-  const [value, setValue] = useState(props.value ?? "");
+  const [value, setValue] = useState(props.value);
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -74,6 +73,7 @@ export default function Input(props: {
   return (
     <div className={styles.inputContainer}>
       <label
+        data-testid={props.id}
         htmlFor={props.id}
         className={`${styles.label} ${props.hidden ? styles.hidden : ""}`}
       >
