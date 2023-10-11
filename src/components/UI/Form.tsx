@@ -50,7 +50,6 @@ export default function Form({
   };
 
   const verifyFormValid = (formState: InputValidity) => {
-    console.log(formState);
     for (const input of formState) {
       if (!input.isValid) {
         setIsFormValid(false);

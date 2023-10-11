@@ -12,6 +12,7 @@ export const AuthContextProvider = (props: any) => {
 
   useEffect(() => {
     const token = getCookie("door_game_token");
+    console.log("doorgame");
 
     if (token) {
       setIsLoggedIn(true);
