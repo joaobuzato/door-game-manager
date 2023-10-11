@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Input, { ValidationOpts } from "./Input";
 import { editItem, saveItem } from "../../clients/doorApiClient";
 import styles from "./Form.module.css";
-import React from "react";
 
 type FormProps = {
   saveButtonText?: string;
@@ -51,6 +50,7 @@ export default function Form({
   };
 
   const verifyFormValid = (formState: InputValidity) => {
+    console.log(formState);
     for (const input of formState) {
       if (!input.isValid) {
         setIsFormValid(false);
