@@ -103,8 +103,6 @@ describe("UI Form", () => {
 
   test("Should render an input and edit correctly", async () => {
     const props = {
-      saveButtonText: "botao-salvar",
-      cancelButtonText: "botao-cancelar",
       onCancelCallback: jest.fn(),
       onSuccessCallback: jest.fn(),
       onErrorCallback: jest.fn(),
@@ -139,7 +137,12 @@ describe("UI Form", () => {
     };
     render(<Form {...props}></Form>);
 
-    fireEvent.click(screen.getByRole("button", { name: /botao-salvar/i }));
+    expect(screen.getByRole("button", { name: /Salvar/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Cancelar/i })
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /Salvar/i }));
     expect(editItem).toBeCalledTimes(1);
     expect(editItem).toBeCalledWith(
       props.endpoint,
