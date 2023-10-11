@@ -52,8 +52,6 @@ describe("UI Input", () => {
       const validation = { required: true, minLength: 2, maxLength: 10 };
       const validateProps = { ...props, validation };
       render(<Input {...validateProps}></Input>);
-
-      const label = await screen.findByTestId(props.id);
       const input = await screen.findByLabelText("label");
 
       //required = true
