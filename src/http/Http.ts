@@ -48,7 +48,6 @@ export default class Http {
     body: T,
     headers: { authorization: string }
   ): Promise<Response> {
-    console.log(body);
     const response = await fetch(`${BASE_URL}${endpoint}/${id}`, {
       method: "PUT",
       headers: {
@@ -57,11 +56,7 @@ export default class Http {
       },
       body: JSON.stringify(body),
     });
-    if (response.status > 300) {
-      return response;
-    }
     const json = await response.json();
-    console.log(json);
     return json;
   }
 
@@ -70,7 +65,6 @@ export default class Http {
     body: T,
     headers: { authorization: string }
   ): Promise<Response> {
-    console.log(body);
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: "POST",
       headers: {
@@ -79,12 +73,7 @@ export default class Http {
       },
       body: JSON.stringify(body),
     });
-    console.log(response);
-    if (response.status > 300) {
-      return response;
-    }
     const json = await response.json();
-    console.log(json);
     return json;
   }
 }
