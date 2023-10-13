@@ -3,7 +3,7 @@ function setCookie(name: string, value: string, daysToExpire: number): void {
   expirationDate.setDate(expirationDate.getDate() + daysToExpire);
   const expires = `expires=${expirationDate.toUTCString()}`;
   const cookieString = `${name}=${value}; ${expires}; path=/`;
-  console.log(cookieString);
+
   document.cookie = `${name}=${value}; ${expires}; path=/`;
 }
 
