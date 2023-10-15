@@ -2,6 +2,7 @@ import { ExtendedText } from "../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ExtendedTextItem.module.css";
+import React from "react";
 
 export default function ExtendedTextItem(props: {
   extendedText: ExtendedText;

@@ -2,6 +2,7 @@ import { Room } from "../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import styles from "./RoomItem.module.css";
+import React from "react";
 
 export default function RoomItem(props: {
   room: Room;

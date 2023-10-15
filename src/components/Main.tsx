@@ -4,6 +4,7 @@ import styles from "./Main.module.css";
 import Button from "./UI/Button";
 import About from "./About/About";
 import Card from "./UI/Card";
+import React from "react";
 
 export default function Main(props: {
   name: string;

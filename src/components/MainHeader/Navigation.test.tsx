@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Navigation from "./Navigation";
-import AuthContext, { AuthContextProvider } from "../../store/AuthContext";
+import { AuthContextProvider } from "../../store/AuthContext";
 
 describe("Navigation", () => {
   test("should show nav without button when unlogged", () => {

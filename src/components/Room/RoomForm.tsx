@@ -2,6 +2,7 @@ import { Room } from "../../types";
 import ListDoor from "../Door/ListDoor";
 import ListExtendedText from "../ExtendedText/ListExtendedText";
 import Form from "../UI/Form";
+import React from "react";
 
 export default function RoomForm(props: {
   room?: Room;

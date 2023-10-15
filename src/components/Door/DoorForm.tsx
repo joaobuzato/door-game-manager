@@ -1,5 +1,6 @@
 import { Door } from "../../types";
 import Form from "../UI/Form";
+import React from "react";
 
 export default function DoorForm(props: {
   roomId: number;

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import styles from "./Login.module.css";
 import Form from "../UI/Form";
@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <Modal>
       <div className={styles.login}>
-        <h1>Entrar</h1>
+        <h2>Entrar</h2>
         <Form
           onSuccessCallback={(response: any) => {
             context.onLogin(response);

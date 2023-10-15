@@ -4,7 +4,13 @@ import ReactDOM from "react-dom";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
-  return <div onClick={props.onCloseModal} className={classes.backdrop}></div>;
+  return (
+    <div
+      data-testid="backdrop"
+      onClick={props.onCloseModal}
+      className={classes.backdrop}
+    ></div>
+  );
 };
 
 const ModalOverlay = (props) => {

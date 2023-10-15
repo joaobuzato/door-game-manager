@@ -2,6 +2,7 @@ import { Door } from "../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import styles from "./DoorItem.module.css";
+import React from "react";
 
 export default function DoorItem(props: {
   door: Door;

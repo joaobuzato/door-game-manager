@@ -1,5 +1,6 @@
 import { ExtendedText } from "../../types";
 import Form from "../UI/Form";
+import React from "react";
 
 export default function ExtendedTextForm(props: {
   roomId: number;

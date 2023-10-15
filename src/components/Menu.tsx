@@ -1,5 +1,6 @@
 import { MouseEvent } from "react";
 import styles from "./Menu.module.css";
+import React from "react";
 
 export default function Menu(props: {
   setActivePage: Function;

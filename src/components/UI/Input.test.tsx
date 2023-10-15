@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Input, { ValidationOpts } from "./Input";
+import Input from "./Input";
 import styles from "./Input.module.css";
 import React from "react";
 
